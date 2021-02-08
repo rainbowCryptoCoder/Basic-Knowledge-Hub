@@ -6,14 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -24,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     private Vibrator v;
+    EditText search_txt;
+    TextView search_txt2;
+    TextView search_txt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_Layout);
         toolbar = findViewById(R.id.toolbar);
+        search_txt = findViewById(R.id.search_ed_txt);
+        search_txt2 = findViewById(R.id.search_txt);
+        search_txt3 = findViewById(R.id.search_txt2);
+
         setSupportActionBar(toolbar);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -103,10 +119,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void card_search(View view) {
         Vibrate(80);
-        Intent intent_search;
-        intent_search = new Intent(this, web_view.class);
-        intent_search.putExtra("url", "https://basicknowledgehub.com/");
-        startActivity(intent_search);
+        search_txt.setVisibility(View.VISIBLE);
+        search_txt2.setVisibility(View.INVISIBLE);
+        search_txt3.setVisibility(View.INVISIBLE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInputFromWindow(search_txt.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+        search_txt.requestFocus();
+
+        search_txt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        Intent intent = new Intent(MainActivity.this, web_view.class);
+                        String query = search_txt.getText().toString();
+                        intent.putExtra("url", "https://basicknowledgehub.com/" + query);
+                        startActivity(intent);
+                    return true;
+                }
+                    return false;
+            }
+        });
+//        try {
+//            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//            String term = search_txt.getText().toString();
+//            intent.putExtra(SearchManager.QUERY, term);
+//            startActivity(intent);
+//        }
+//        catch (Exception e){
+//            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void card_blogging(View view) {

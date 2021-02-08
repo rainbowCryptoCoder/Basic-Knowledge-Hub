@@ -14,7 +14,7 @@ public class web_view extends AppCompatActivity {
 
     WebView webView;
     WebSettings webSettings;
-//    ProgressBar progressBar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,27 +30,27 @@ public class web_view extends AppCompatActivity {
         //webSettings.setBuiltInZoomControls(true);
         webView.loadUrl(url);
 
-//        progressBar = (ProgressBar) findViewById(R.id.progressBar_electronics);
-//        progressBar.setMax(100);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setMax(100);
 
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
 
-//        webView.setWebViewClient(new WebViewClient(){
-//            @Override
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                super.onPageStarted(view, url, favicon);
-//                progressBar.setVisibility(View.VISIBLE);
-//                setTitle("Loading...");
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-//                progressBar.setVisibility(View.GONE);
-//                setTitle(view.getTitle());
-//            }
-//        });
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+                setTitle("Loading...");
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
+                setTitle(view.getTitle());
+            }
+        });
     }
 
     @Override
