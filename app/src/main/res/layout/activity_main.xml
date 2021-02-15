@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/drawer_Layout"
-    android:background="@drawable/main_background">
+    android:background="@drawable/main_background"
+    tools:openDrawer="start">
 
     <ScrollView
     android:layout_width="match_parent"
@@ -35,11 +36,13 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_profile_img"
                     android:layout_width="110dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/user_default_image"
                     app:civ_border_width="5dp"
                     app:civ_border_color="#707070"
-                    android:layout_marginStart="10dp"/>
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
 
             </RelativeLayout>
 
@@ -51,23 +54,25 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="User name"
-                    android:gravity="center_horizontal"
-                    android:textSize="34dp"
-                    android:textStyle="bold"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/architects_daughter"
+                    android:gravity="center_horizontal"
+                    android:text="User name"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/greet_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Hello there!"
-                    android:gravity="center_horizontal"
                     android:layout_below="@+id/user_name"
+                    android:fontFamily="@font/architects_daughter"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hello there!"
+                    android:textSize="20dp" />
 
             </RelativeLayout>
 
@@ -100,6 +105,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Search articles"
+                            android:fontFamily="@font/architects_daughter"
                             android:layout_centerHorizontal="true"
                             android:textSize="40dp"
                             android:textStyle="bold"
@@ -121,6 +127,7 @@
                             android:text="New articles are pushed daily!"
                             android:layout_below="@+id/search_txt"
                             android:textSize="20dp"
+                            android:fontFamily="@font/architects_daughter"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginTop="10dp"/>
@@ -154,13 +161,81 @@
                         android:layout_weight="1"
                         android:layout_margin="8dp"
                         android:clickable="true"
+                        android:onClick="card_how_to_fix">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="30dp"
+                            android:fontFamily="@font/architects_daughter"
+                            android:textStyle="bold"
+                            android:text="How to fix"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"/>
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/ic_how_to_fix"
+                            android:layout_marginTop="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="10dp"
+                        android:layout_weight="1"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:onClick="card_mobile">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="29dp"
+                            android:fontFamily="@font/architects_daughter"
+                            android:text="Mobile Tips"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"/>
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/ic_google_tricks"
+                            android:layout_marginTop="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="10dp"
+                        android:layout_weight="1"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
                         android:onClick="card_blogging">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Blogging Tips"
-                            android:textSize="30dp"
+                            android:fontFamily="@font/architects_daughter"
+                            android:textSize="35dp"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"/>
@@ -181,21 +256,22 @@
                         android:layout_weight="1"
                         android:layout_margin="8dp"
                         android:clickable="true"
-                        android:onClick="card_seo">
+                        android:onClick="card_app_tricks">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="SEO tricks"
-                            android:textSize="30dp"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/architects_daughter"
+                            android:text="App Tips n Tricks"
                             android:textStyle="bold"
                             android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"/>
+                            android:layout_marginEnd="5dp" />
 
                         <ImageView
                             android:layout_width="200dp"
                             android:layout_height="200dp"
-                            android:src="@drawable/ic_seo_tricks"
+                            android:src="@drawable/ic_app_tricks"
                             android:layout_marginTop="10dp"/>
 
                     </androidx.cardview.widget.CardView>
@@ -232,6 +308,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="iPhone Tricks"
+                                android:fontFamily="@font/architects_daughter"
                                 android:textSize="30dp"
                                 android:textStyle="bold"
                                 android:layout_marginStart="5dp"
@@ -243,6 +320,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Find interesting iPhone tips and tricks here."
                                 android:textSize="20dp"
+                                android:fontFamily="@font/architects_daughter"
                                 android:layout_below="@+id/iphone_txt"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"/>
@@ -273,27 +351,29 @@
                             android:layout_margin="8dp"
                             android:layout_weight="1"
                             android:clickable="true"
-                            android:onClick="card_google">
+                            android:onClick="card_seo">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <TextView
-                                    android:id="@+id/google_txt"
+                                    android:id="@+id/ceo_txt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Google Tricks"
-                                    android:textSize="30dp"
+                                    android:textSize="34dp"
+                                    android:fontFamily="@font/architects_daughter"
                                     android:textStyle="bold"
+                                    android:text="SEO tricks"
                                     android:layout_marginStart="5dp"
                                     android:layout_marginEnd="5dp"/>
+
 
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="100dp"
-                                    android:src="@drawable/ic_google_tricks"
-                                    android:layout_below="@+id/google_txt"/>
+                                    android:src="@drawable/ic_seo_tricks"
+                                    android:layout_below="@+id/ceo_txt"/>
 
                             </RelativeLayout>
 
@@ -320,6 +400,7 @@
                                     android:text="Android Tricks"
                                     android:textSize="30dp"
                                     android:textStyle="bold"
+                                    android:fontFamily="@font/architects_daughter"
                                     android:layout_marginStart="5dp"
                                     android:layout_marginEnd="5dp"/>
 

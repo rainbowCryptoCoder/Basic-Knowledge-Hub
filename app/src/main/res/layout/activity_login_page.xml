@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginPage"
+    android:background="@drawable/img_login">
+
+    <ImageView
+        android:id="@+id/iv_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_google"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_google"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/architects_daughter"
+        android:text="Sign-in with Google Account"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Sign-in"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_google"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/white"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skip"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btn_sign_in"
+        android:layout_centerHorizontal="true"
+        app:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:onClick="btn_skip"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We will not access any of your data aside from the public picture and displayed name."
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/architects_daughter"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.SearchManager;
@@ -21,10 +22,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,10 +41,16 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     NavigationView navigationView;
+
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+
     private Vibrator v;
     EditText search_txt;
     TextView search_txt2;
     TextView search_txt3;
+    ImageView userPhoto;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +62,29 @@ public class MainActivity extends AppCompatActivity {
         search_txt = findViewById(R.id.search_ed_txt);
         search_txt2 = findViewById(R.id.search_txt);
         search_txt3 = findViewById(R.id.search_txt2);
+        userName = findViewById(R.id.user_name);
+        userPhoto = findViewById(R.id.user_profile_img);
+
+        //Initializing the Firebase
+        mAuth = FirebaseAuth.getInstance();
+        //Getting the current user
+        currentUser = mAuth.getCurrentUser();
+
+        if (currentUser!=null){
+            //Getting the user name from "currentUser" and setting it in the textView
+            userName.setText(currentUser.getDisplayName());
+            //Using Glide to display the user image
+            Glide.with(this).load(currentUser.getPhotoUrl()).into(userPhoto);
+        }
+        else {
+        }
 
         setSupportActionBar(toolbar);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView = findViewById(R.id.nav_view);
+        updateNavView();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -74,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.contact_us:
                         Intent intent_contact;
-                        intent_contact = new Intent(MainActivity.this, web_view.class);
+                        intent_contact = new Intent(MainActivity.this, Web_view_contact_us.class);
                         intent_contact.putExtra("url", "https://basicknowledgehub.com/contact-us/");
                         startActivity(intent_contact);
                         break;
@@ -99,11 +131,31 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.log_out:
-                        break;
+                        Vibrate(150);
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                 }
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+    }
+
+    private void updateNavView() {
+        navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        if (currentUser != null){
+            TextView userMail = headerView.findViewById(R.id.tv_user_mail);
+//        ImageView userPhoto2 = headerView.findViewById(R.id.user_profile_img2);
+
+            userMail.setText(currentUser.getEmail());
+//        Glide.with(this).load(currentUser.getPhotoUrl()).into(userPhoto2);
+        }
+        else {
+        }
     }
 
     public void Vibrate(long milliSecond){
@@ -142,15 +194,6 @@ public class MainActivity extends AppCompatActivity {
                     return false;
             }
         });
-//        try {
-//            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//            String term = search_txt.getText().toString();
-//            intent.putExtra(SearchManager.QUERY, term);
-//            startActivity(intent);
-//        }
-//        catch (Exception e){
-//            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void card_blogging(View view) {
@@ -163,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     public void card_seo(View view) {
         Intent intent_search;
         intent_search = new Intent(this, web_view.class);
-        intent_search.putExtra("url", "https://basicknowledgehub.com/category/computer-tips-tricks/");
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/seo-tips-tricks/");
         startActivity(intent_search);
     }
 
@@ -174,17 +217,31 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_search);
     }
 
-    public void card_google(View view) {
+    public void card_mobile(View view) {
         Intent intent_search;
         intent_search = new Intent(this, web_view.class);
-        intent_search.putExtra("url", "https://basicknowledgehub.com/category/google-tips-tricks/");
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/mobile-tips-tricks/");
         startActivity(intent_search);
     }
 
     public void card_android(View view) {
         Intent intent_search;
         intent_search = new Intent(this, web_view.class);
-        intent_search.putExtra("url", "https://basicknowledgehub.com/category/android-tips-tricks/");
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/app-tips-tricks/");
+        startActivity(intent_search);
+    }
+
+    public void card_how_to_fix(View view) {
+        Intent intent_search;
+        intent_search = new Intent(this, Web_view_howtofix.class);
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/how-to-fix/");
+        startActivity(intent_search);
+    }
+
+    public void card_app_tricks(View view) {
+        Intent intent_search;
+        intent_search = new Intent(this, web_view.class);
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/app-tips-tricks/");
         startActivity(intent_search);
     }
 }
