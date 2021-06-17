@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public void card_android(View view) {
         Intent intent_search;
         intent_search = new Intent(this, web_view.class);
-        intent_search.putExtra("url", "https://basicknowledgehub.com/category/app-tips-tricks/");
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/samsung-tips-tricks/");
         startActivity(intent_search);
     }
 
@@ -242,6 +242,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent_search;
         intent_search = new Intent(this, web_view.class);
         intent_search.putExtra("url", "https://basicknowledgehub.com/category/app-tips-tricks/");
+        startActivity(intent_search);
+    }
+
+    public void root_search(View view) {
+        Intent intent_search;
+        intent_search = new Intent(this, web_view.class);
+        intent_search.putExtra("url", "https://basicknowledgehub.com/category/root-tips-tricks/");
         startActivity(intent_search);
     }
 }

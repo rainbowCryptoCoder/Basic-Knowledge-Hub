@@ -41,7 +41,7 @@ public class LoginPage extends AppCompatActivity {
 
         //initialize sign in option
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("250696038467-pt9ml0hkv8m8eerg16vmucieq8dtr4du.apps.googleusercontent.com")
+                .requestIdToken("689986635132-1thn09bfu2gbds17hcl9erjhph8e70qm.apps.googleusercontent.com")
                 .requestEmail().build();
 
         //initialize sign in client
